@@ -11,9 +11,12 @@ const router = createBrowserRouter([
   },
   {
     path: '/TitanFormPage',
-    element: <FormPage></FormPage>
+    element: <FormPage />
   },
-  
+  {
+    path: '*',
+    element: <Navigate to='/TitanFormPage' replace />
+  }
 ]);
 
 createRoot(document.getElementById('root')).render(
