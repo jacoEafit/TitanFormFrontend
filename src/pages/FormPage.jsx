@@ -64,11 +64,21 @@ export const FormPage = () => {
   }
 
   //Lógica envio formulario a backend:
-  const handleEnvioFormulario = async() => {
+  const handleEnvioFormulario = async () => {
     //Si hay campos nulos se hace warning
-    if(!respuestaPregunta1 || !respuestaPregunta2 || !respuestaPreguntaComentarios || (respuestaPregunta2 == "si" && (respuestaPreguntaA == null || respuestaPreguntaB == null)) || (respuestaPregunta2 == "no" && respuestaPreguntaC == null)){
+    if (
+        !respuestaPregunta1 ||
+        !respuestaPregunta2 ||
+        !respuestaPreguntaComentarios ||
+        (respuestaPregunta2 == "si" &&
+        (respuestaPreguntaA == null || respuestaPreguntaB == null)) ||
+        (respuestaPregunta2 == "no" && respuestaPreguntaC == null)
+    ) {
         setOpenSnackbar1(true);
-        setSnackbar1Info({message:"Llena todos los campos para continuar",severity:"warning"});
+        setSnackbar1Info({
+        message: "Llena todos los campos para continuar",
+        severity: "warning",
+        });
         return;
     }
 
@@ -77,23 +87,41 @@ export const FormPage = () => {
         cedula: cedula,
         correo_electronico: correo,
         telefono: telefono,
-        respuesta_pregunta1:respuestaPregunta1,
-        respuesta_pregunta2:respuestaPregunta2,
-        respuesta_preguntaA:respuestaPreguntaA,
-        respuesta_preguntaB:respuestaPreguntaB,
-        respuesta_preguntaC:respuestaPreguntaC,
-        respuesta_pregunta_comentarios:respuestaPreguntaComentarios
-    }
+        respuesta_pregunta1: respuestaPregunta1,
+        respuesta_pregunta2: respuestaPregunta2,
+        respuesta_preguntaA: respuestaPreguntaA,
+        respuesta_preguntaB: respuestaPreguntaB,
+        respuesta_preguntaC: respuestaPreguntaC,
+        respuesta_pregunta_comentarios: respuestaPreguntaComentarios,
+    };
 
-    try{
-        const response = await postFormInfo(jsonFormulario);
-        window.location.href = 'https://www.google.com';
-    }catch(error){
+    try {
+        const timeout = new Promise((_, reject) =>
+        setTimeout(() => reject(new Error("timeout")), 8000)
+        );
+
+        const response = await Promise.race([
+        postFormInfo(jsonFormulario),
+        timeout,
+        ]);
+
+        window.location.href =
+        "https://titan.com.pa/?srsltid=AfmBOop3XjUqY8fltkrvjq2czzJz9W_wGj0fQA5PmLQ8fhgsBu8BVIm7";
+    } catch (error) {
+        const mensaje =
+        error.message === "timeout"
+            ? "La conexión tardó demasiado, intenta nuevamente"
+            : "El backend rechazó la conexión";
+
         setOpenSnackbar1(true);
-        setSnackbar1Info({message:"El backend rechazó la conexión",severity:"error"});
+        setSnackbar1Info({
+        message: mensaje,
+        severity: "error",
+        });
         return;
     }
-  }
+    };
+
   
 
   
