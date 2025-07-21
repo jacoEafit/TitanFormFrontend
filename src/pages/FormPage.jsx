@@ -182,6 +182,7 @@ export const FormPage = () => {
                 }
                 }}
                 color="primary"
+                sx={{ backgroundColor: 'white' }}
             />
             <FormHelperText>{' '}</FormHelperText>
             </FormControl>
@@ -194,6 +195,7 @@ export const FormPage = () => {
                 value={cedula}
                 onChange={(e) => setCedula(e.target.value)}
                 color="primary"
+                sx={{ backgroundColor: 'white' }}
             />
             <FormHelperText>{' '}</FormHelperText>
             </FormControl>
@@ -208,26 +210,35 @@ export const FormPage = () => {
                 value={correo}
                 onChange={(e) => setCorreo(e.target.value)}
                 color="primary"
+                sx={{ backgroundColor: 'white' }}
             />
             <FormHelperText>{errores.correo || ' '}</FormHelperText>
             </FormControl>
 
             <FormControl fullWidth>
-            <Typography variant="subtitle1" sx={{ mb: 0.5 }}>
-                Teléfono
-            </Typography>
-            <OutlinedInput
-                value={telefono}
-                onChange={(e) => {
-                const valor = e.target.value;
-                if (/^\d*$/.test(valor)) {
-                    setTelefono(valor);
-                }
-                }}
-                color="primary"
-            />
-            <FormHelperText>{' '}</FormHelperText>
+                <Typography variant="subtitle1" sx={{ mb: 0.5 }}>
+                    Teléfono
+                </Typography>
+                <OutlinedInput
+                    value={telefono}
+                    onBeforeInput={(e) => {
+                    // Bloquear cualquier carácter que no sea dígito
+                    if (!/^\d$/.test(e.data)) {
+                        e.preventDefault();
+                    }
+                    }}
+                    onChange={(e) => setTelefono(e.target.value)}
+                    inputProps={{ maxLength: 15 }} // máximo de dígitos 
+                    color="primary"
+                    sx={{
+                    "& .MuiOutlinedInput-input": {
+                        backgroundColor: "white"
+                    }
+                    }}
+                />
+                <FormHelperText>{' '}</FormHelperText>
             </FormControl>
+
         </Box>
 
         <Box
@@ -289,6 +300,7 @@ export const FormPage = () => {
                 value={respuestaPregunta1}
                 onChange={(e) => setRespuestaPregunta1(e.target.value)}
                 displayEmpty
+                sx={{ backgroundColor: 'white' }}
                 renderValue={(selected) => {
                 switch (selected) {
                     case 'excelente':
@@ -356,6 +368,7 @@ export const FormPage = () => {
                 value={respuestaPregunta2}
                 onChange={(e) => handleCambioPregunta2(e)}
                 displayEmpty
+                sx={{ backgroundColor: 'white' }}
                 renderValue={(selected) => {
                     if (selected === null) {
                     return <em style={{ color: '#888' }}>Selecciona una opción</em>;
@@ -387,6 +400,7 @@ export const FormPage = () => {
                         value={respuestaPreguntaA}
                         onChange={(e) => setRespuestaPreguntaA(e.target.value)}
                         displayEmpty
+                        sx={{ backgroundColor: 'white' }}
                         renderValue={(selected) =>
                             selected === null ? <em style={{ color: '#888' }}>Selecciona una opción</em> : selected === 'si' ? 'Sí' : 'No'
                         }
@@ -409,6 +423,7 @@ export const FormPage = () => {
                         value={respuestaPreguntaB}
                         onChange={(e) => setRespuestaPreguntaB(e.target.value)}
                         displayEmpty
+                        sx={{ backgroundColor: 'white' }}
                         renderValue={(selected) =>
                             selected === null ? <em style={{ color: '#888' }}>Selecciona una opción</em> : selected === 'si' ? 'Sí' : 'No'
                         }
@@ -435,6 +450,7 @@ export const FormPage = () => {
                         value={respuestaPreguntaC}
                         onChange={(e) => setRespuestaPreguntaC(e.target.value)}
                         displayEmpty
+                        sx={{ backgroundColor: 'white' }}
                         renderValue={(selected) =>
                             selected === null ? <em style={{ color: '#888' }}>Selecciona una opción</em> : selected === 'si' ? 'Sí' : 'No'
                         }
@@ -467,6 +483,7 @@ export const FormPage = () => {
                 value={respuestaPreguntaComentarios}
                 onChange={(e) => setRespuestaPreguntaComentarios(e.target.value)}
                 inputProps={{ maxLength: 300 }}
+                sx={{ backgroundColor: 'white' }}
                 />
             </FormControl>
         </Box>
