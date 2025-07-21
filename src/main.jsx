@@ -3,6 +3,7 @@ import { createBrowserRouter,RouterProvider,Navigate } from "react-router-dom";
 import { FormPage } from './pages/FormPage';
 import { titanTheme } from './styles/theme';
 import { ThemeProvider } from '@emotion/react';
+import { TitanFormSubmitSuccess } from './pages/TitanFormSubmitSuccess';
 
 const router = createBrowserRouter([
   {
@@ -12,6 +13,10 @@ const router = createBrowserRouter([
   {
     path: '/TitanFormPage',
     element: <FormPage />
+  },
+  {
+    path: '/TitanFormSubmitSuccess',
+    element: <TitanFormSubmitSuccess />
   },
   {
     path: '*',

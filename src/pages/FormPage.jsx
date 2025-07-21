@@ -8,8 +8,11 @@ import SentimentSatisfiedIcon from '@mui/icons-material/SentimentSatisfied';
 import SentimentNeutralIcon from '@mui/icons-material/SentimentNeutral';
 import SentimentVeryDissatisfiedIcon from '@mui/icons-material/SentimentVeryDissatisfied';
 import { postFormInfo } from '../apis/forms.api';
+import { useNavigate } from "react-router-dom";
 
 export const FormPage = () => {
+
+  const navigate = useNavigate();
 
   //Variables primera parte
   const [nombre,setNombre] = useState(null);
@@ -105,8 +108,7 @@ export const FormPage = () => {
         timeout,
         ]);
 
-        window.location.href =
-        "https://titan.com.pa/?srsltid=AfmBOop3XjUqY8fltkrvjq2czzJz9W_wGj0fQA5PmLQ8fhgsBu8BVIm7";
+        navigate("/TitanFormSubmitSuccess"); //Redirige a componente TitanFormSubmitSuccess
     } catch (error) {
         const mensaje =
         error.message === "timeout"
