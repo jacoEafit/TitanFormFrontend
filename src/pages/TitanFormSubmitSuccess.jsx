@@ -20,7 +20,7 @@ export const TitanFormSubmitSuccess = () => {
             justifyContent: "center",
             alignItems: "center",
             height: "100vh",
-            backgroundColor: "#f4f4f4",
+            backgroundColor: "primary",
         }}
         >
         <Paper
